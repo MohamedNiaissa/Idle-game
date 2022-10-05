@@ -6,6 +6,7 @@ export default defineStore('trades', {
     state: () => ({
         coins: 0,
         factories: [],
+        offers: [],
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjQ5NjkzNzYsImV4cCI6MTY2NTU3NDE3Nn0.d1A3eWk92Tnj7tQhtdN0gvewrZNN2NmgEPttHQHaOlM"
     }),
     actions: {
@@ -40,11 +41,14 @@ export default defineStore('trades', {
             })
         },
         async getAllTrades() {
-            await axios.get('http://apigame.co/trades/all', {
+            let dataOffers = await axios.get('http://apigame.co/trades/all', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
             })
+            this.offers = dataOffers;
+    
+            console.log(this.offers);
         }
     }
 })
