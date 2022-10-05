@@ -18,9 +18,11 @@
   
   <style scoped>
     .wrapper{
-      background-color: #6e4747;
+      background-color: rgb(0 0 139 / 50%);
       color: #fff;
       height: 90px;
+      border-color: white;
+      border-style: solid;
     }
     .navbar{
       display: flex;
