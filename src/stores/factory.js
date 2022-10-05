@@ -28,6 +28,13 @@ export default defineStore('factory', {
                 }
             })
         },
+        async getFactoryLimit() {
+            await axios.get('http://apigame.co/users/factory-limit', {}, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
         async createFactory(modelId) {
             await axios.post('http://apigame.co/factories', { factory_model: modelId }, {
                 headers: {
