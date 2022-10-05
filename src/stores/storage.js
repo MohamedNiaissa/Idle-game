@@ -16,15 +16,18 @@ export default defineStore('storage',{
     // },
     async fetchFactories() {
         const dataFactories  = await axios.get('http://apigame.co/factories' , {
-           headers : {
-            "Authorization" : "Bearer " + this.token,
-            'Access-Control-Allow-Origin': '*',
-           }
           })
-
         this.factories = dataFactories;
 
         console.log(this.factories);
+    },
+
+    async fetchRessources(){
+      const dataRessources = await axios.get('http://apigame.co/resources', {
+      })
+      this.ressources = dataRessources;
+
+      console.log(this.ressources);
     }
   },
 })
