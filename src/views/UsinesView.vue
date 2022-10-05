@@ -19,10 +19,6 @@ import useFactoryStore from "/src/stores/factory.js"
 
 export default {
   methods: {
-    // printFactories() {
-    //   console.log(this.fetchFactories())
-
-    // },
     ...mapActions(useFactoryStore, ['fetchFactories'])
   }
 }
