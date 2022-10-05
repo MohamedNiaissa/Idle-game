@@ -9,7 +9,7 @@
 
 <script>
 import { mapActions } from 'pinia'
-import useStorageStore from "../stores/storage.js"
+import useFactoryStore from "../stores/factory.js"
 
 export default {
   methods: {
@@ -17,7 +17,7 @@ export default {
     //   console.log(this.fetchFactories())
       
     // },
-    ...mapActions(useStorageStore, ['fetchFactories'])
+    ...mapActions(useFactoryStore, ['fetchFactories'])
   }
 }
 
