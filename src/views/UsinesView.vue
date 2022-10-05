@@ -1,7 +1,5 @@
 <template>
   <body>
-    <div>Usines :)</div>
-
     <button @click="this.fetchFactories()"> hey </button>
       <div>Usines :</div>
       <div class="usineList">
@@ -17,7 +15,7 @@
 
 <script>
 import { mapActions } from 'pinia'
-import useFactoryStore from "../stores/factory.js"
+import useFactoryStore from "/src/stores/factory.js"
 
 export default {
   methods: {
