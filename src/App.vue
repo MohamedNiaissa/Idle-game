@@ -4,7 +4,6 @@
   <template>
     <header class="wrapper">
       <div class="navbar">
-  
         <nav>
           <RouterLink to="/">Usines</RouterLink>
           <RouterLink to="/market">Marché</RouterLink>
