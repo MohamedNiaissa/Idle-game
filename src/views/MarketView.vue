@@ -23,7 +23,7 @@
             <div class="offers">
                 <OffreComp v-for="(offer, index) in this.offers" :key="index" v-bind:offers="offer" />
             </div>
-            <button @click="this.getAllResources()"> offers </button>
+            <button @click="this.getAllRessources()"> offers </button>
         </div>
     </body>
 </template>
@@ -41,7 +41,7 @@ export default {
     // },
     methods: {
         //...mapActions(useTradesStore, ['getAllTrades']),
-        ...mapActions(useRessourcesStore, ['getAllResources']),
+        ...mapActions(useRessourcesStore, ['getAllRessources']),
         ...mapActions(useTradesStore, ['createTrade']),
         submit() {
             // this.$store.dispatch('trades/addTrade', {
