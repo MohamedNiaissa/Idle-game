@@ -22,40 +22,108 @@
 
         </div>
         <div class="ligne"></div>
-        <div class = "allItem">
-
-            <div class="item" v-for="(ress,index) in ressources" :key = index>
-                    <span> {{ress}} </span>
-                    <input type="button" value="Acheter">
+        <div class = "allItemwithBtn">
+            <div class="allItem">
+                <div class="item" v-for="(ress,index) in ressources.slice(p,n)" :key = index>
+                        <span> {{ress}} </span>
+                        <input type="button" value="Acheter">
+                </div>
+            </div>
+            <div class="btn_class">
+                <button @click = "Prev">Prev</button>
+                <button @click = "Next">Next</button>
             </div>
         </div>
+       
     </div>
 </template>
 
 
-<style>
-    .allItem{
-        display: flex;
-        flex-wrap: wrap;
-        width: 70%;
-    }
-    .item{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 80px;
-        margin: 20px;
-        border: solid cornflowerblue;
-    }
-    body{
-        background-color: #dee9ff;
-    }
+<script>
 
-.registration-form{
-	padding: 50px 0;
+
+
+
+export default {
+    
+    name: 'MarketView',
+    data() {
+        return {
+            ressources: ["bla", "bla", "l", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "fin"],
+            p : 0,
+            n : 4
+        }
+    },
+    props: {
+
+    },
+    methods: {
+        Prev(){
+            if(this.p > 0 ){
+                this.p -= 5;
+                this.n -= 5;
+                console.log(this.p,this.n)
+            }
+        },
+        Next(){
+            if(this.ressources.length > this.n){
+                this.p += 5;
+                this.n += 5;
+                console.log(this.p,this.n)
+            }
+        }
+
+    },
+    computed: {
+
+    },
+    mounted() {
+    }
+}
+</script>
+
+
+<style>
+.buttons {
+    display: flex;
 }
 
-.registration-form form{
+.fetchedElements {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.allItemwithBtn {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.allItem{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 80px;
+    margin: 20px;
+    border: solid cornflowerblue;
+}
+
+body {
+    background-color: #dee9ff;
+}
+
+.registration-form {
+    padding: 50px 0;
+}
+
+.registration-form form {
     background-color: #fff;
     max-width: 600px;
     margin: auto;
@@ -63,8 +131,8 @@
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 }
 
-.registration-form .form-icon{
-	text-align: center;
+.registration-form .form-icon {
+    text-align: center;
     background-color: #5891ff;
     border-radius: 50%;
     font-size: 40px;
@@ -76,13 +144,13 @@
     line-height: 100px;
 }
 
-.registration-form .item{
-	border-radius: 20px;
+.registration-form .item {
+    border-radius: 20px;
     margin-bottom: 25px;
     padding: 10px 20px;
 }
 
-.registration-form .create-account{
+.registration-form .create-account {
     border-radius: 30px;
     padding: 10px 20px;
     font-size: 18px;
@@ -93,7 +161,7 @@
     margin-top: 20px;
 }
 
-.registration-form .social-media{
+.registration-form .social-media {
     max-width: 600px;
     background-color: #fff;
     margin: auto;
@@ -106,12 +174,12 @@
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 }
 
-.registration-form .social-icons{
+.registration-form .social-icons {
     margin-top: 30px;
     margin-bottom: 16px;
 }
 
-.registration-form .social-icons a{
+.registration-form .social-icons a {
     font-size: 23px;
     margin: 0 3px;
     color: #5691ff;
@@ -125,17 +193,17 @@
     line-height: 45px;
 }
 
-.registration-form .social-icons a:hover{
+.registration-form .social-icons a:hover {
     text-decoration: none;
     opacity: 0.6;
 }
 
 @media (max-width: 576px) {
-    .registration-form form{
+    .registration-form form {
         padding: 50px 20px;
     }
 
-    .registration-form .form-icon{
+    .registration-form .form-icon {
         width: 70px;
         height: 70px;
         font-size: 30px;
@@ -143,41 +211,21 @@
     }
 }
 
-.content-form{
+.content-form {
     width: 32%;
     margin-left: 20px;
 }
 
-.ligne{
+.ligne {
 
-    left:20%;
+    left: 20%;
     margin-left: 20px;
     width: 2px;
     height: 100vh;
     background-color: #fff;
 }
 
-.containerTrade{
+.containerTrade {
     display: flex;
 }
 </style>
-
-<script>
-
-
-    export default {
-        name: 'MarketView',
-        data(){
-            return {
-                ressources : ["bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla","bla"]
-            }
-
-        }, 
-        props : {
-
-        },
-        methods : {
-        
-        }
-    }
-</script>

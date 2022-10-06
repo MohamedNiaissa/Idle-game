@@ -69,7 +69,7 @@ export default defineStore('factory', {
         // Factories-Models
 
         async getAllFactoriesModels() {
-            await axios.get('http://apigame.co//factories/models', {
+            await axios.get('http://apigame.co/factories/models', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }

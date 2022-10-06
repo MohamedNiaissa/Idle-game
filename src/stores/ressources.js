@@ -24,8 +24,8 @@ export default defineStore('ressources', {
         // Ressources
 
 
-        async createRessource(id) {
-            await axios.post('http://apigame.co/users/factories/' + id, {}, {
+        async createRessource(name_resource,img_ressource_url,base_value_ressource) {
+            await axios.post('http://apigame.co/ressources', { name : name_resource, image_url: img_ressource_url, base_value: base_value_ressource}, {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
@@ -45,13 +45,6 @@ export default defineStore('ressources', {
                     "Authorization": "Bearer " + this.token
                 }
             })
-        },
-        async getMyInventory(){  
-            await axios.get('http://apigame.co/inventory/my',{
-                   headers : {
-                    "Authorization" : "Bearer " + this.token
-                  }
-            })
-          }
+        }
     }
 })
