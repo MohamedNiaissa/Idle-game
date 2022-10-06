@@ -1,21 +1,19 @@
 <template>
-    <body>
-        <div>Ressources :)</div>
-
-        <button @click="this.insertRessources(res)">Créer</button>
-    </body>
-    
-
+  <div>{{ res }}</div>
 </template>
-<script>
-    import { RessourceComp } from '@/components/RessourceComp.vue';
-    export default {
-       data(){
-        return { res: ''}
-       },
-       setup(){
-        const PostsRessources = RessourceComp();
-        return { insertRessources: PostsRessources.insertRessources }
-       }
-    }
+
+
+<script setup>
+  import { computed }from 'vue'
+  import { storeToRefs } from 'pinia'
+  import { useResources } from "../stores/resources";
+
+  
+  const { resources }  = storeToRefs(useResources())
+  const { getAllRessources } = useResources()
+  
+  getAllRessources()
+  const res = computed(() => {
+      return resources
+  })
 </script>
