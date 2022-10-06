@@ -49,7 +49,7 @@ export default {
     name: 'MarketView',
     data() {
         return {
-            ressources: ["bla", "bla", "l", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "bla", "fin"],
+            ressources: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"],
             p : 0,
             n : 4
         }
