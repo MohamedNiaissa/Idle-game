@@ -18,75 +18,78 @@ export default defineStore('factory', {
             })
             console.log(dataFactories.data);
             this.factories = dataFactories;
+            console.log(this.factories);
+        },
+        async buyFactoryLimit() {
+            await axios.post('http://apigame.co/users/buy-factory-limit', {}, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+        async getFactoryLimit() {
+            await axios.get('http://apigame.co/users/factory-limit', {}, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+        async createFactory(modelId) {
+            await axios.post('http://apigame.co/factories', { factory_model: modelId }, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
         },
 
-         async buyFactoryLimit() {
-                    await axios.post('http://apigame.co/users/buy-factory-limit', {}, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                },
-                async createFactory(modelId) {
-                    await axios.post('http://apigame.co/factories', {factory_model : modelId}, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                },
-
-                async getFactoryById(id) {
-                    await axios.get('http://apigame.co/factories/' + id, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                },
-
-                async deleteFactoryById(id) {
-                    await axios.delete('http://apigame.co/factories/' + id, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                },
-                async levelUpFactory(id) {
-                    await axios.post('http://apigame.co/factories/' + id + '/levelup',{}, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                },
-
-                // Factories-Models
-
-                async getAllFactoriesModels() {
-                    let  dataFactories = await axios.get('http://apigame.co/factories/models', {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                    this.modelfactories = dataFactories.data;
-                    console.log(dataFactories.data);
-                },
-
-
-                async createModelFactory() {
-                    await axios.post('http://apigame.co/factories/models',{}, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
-                },
-                async deleteFactoryModelById(id) {
-                    await axios.delete('http://apigame.co/factories/models/' + id, {
-                        headers: {
-                            "Authorization": "Bearer " + this.token
-                        }
-                    })
+        async getFactoryById(id) {
+            await axios.get('http://apigame.co/factories/' + id, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
                 }
+            })
+        },
 
-    },
+        async deleteFactoryById(id) {
+            await axios.delete('http://apigame.co/factories/' + id, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+        async levelUpFactory(id) {
+            await axios.post('http://apigame.co/factories/' + id + '/levelup', {}, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
 
+        // Factories-Models
+
+        async getAllFactoriesModels() {
+            await axios.get('http://apigame.co/factories/models', {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+
+
+        async createModelFactory() {
+            await axios.post('http://apigame.co/factories/models', {}, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+        async deleteFactoryModelById(id) {
+            await axios.delete('http://apigame.co/factories/models/' + id, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+    }
 
 })

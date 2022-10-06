@@ -2,8 +2,8 @@ import { createApp } from 'vue'
 import router from './router'
 import App from './App.vue'
 import { createPinia } from 'pinia'
-
-import './assets/main.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import './assets/css/main.css'
 
 const pinia = createPinia()
 
