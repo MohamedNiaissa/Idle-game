@@ -20,8 +20,14 @@
                     <button @click="submit">Ajouter</button>
                 </div>
             </div>
-            <div class="offers">
-                <OffreComp v-for="(offer, index) in this.offers" :key="index" v-bind:offers="offer" />
+            <div class="offersandbtns">
+                <div class="offers">
+                    <OffreComp v-for="(offer, index) in this.offers.slice(p,n)" :key="index" v-bind:offers="offer" />
+                </div>
+                <div class="btns">
+                    <button @click = "Prev"  > Prev </button>
+                    <button @click = "Next"> Next </button>
+                </div>
             </div>
             <button @click="this.getAllRessources()"> offers </button>
         </div>
@@ -31,7 +37,6 @@
 <script>
     
 import { mapActions, mapState } from 'pinia'
-//import useTradesStore from "../stores/trades.js"
 import useRessourcesStore from "../stores/ressources.js"
 import useTradesStore from "../stores/trades.js"
 import OffreComp from '../components/OffreComp.vue'
@@ -54,7 +59,24 @@ export default {
                 quantity: this.quantity,
                 price: this.price
             })
+        },
+        Prev(){
+            
+            if(this.p > 0 ){
+                this.p -= 2;
+                this.n -= 2;
+                console.log(this.p,this.n)
+            }
+        },
+        Next(){
+            if(this.offers.length > this.n){
+                this.p += 2;
+                this.n += 2;
+                console.log(this.p,this.n)
+            }
         }
+
+    
     },
     computed: {
         ...mapState(useRessourcesStore, ['ressources'])
@@ -65,6 +87,8 @@ export default {
     data() {
         //[{id: 1, name: "bitcoin",…}, {id: 2, name: "Fer",…}, {id: 3, name: "Bois",…}]
         return{
+            p : 0,
+            n : 2,
             offers: [
                 {
                     id: 1,
@@ -109,9 +133,15 @@ export default {
 </script>
 
 <style>
+    .offersandbtns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     .market {
         display: flex;
         justify-content: space-between;
+        color: black;
     }
     .form {
         width: 30%;
