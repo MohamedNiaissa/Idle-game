@@ -39,7 +39,6 @@ export default defineStore('ressources', {
                 }
             })
             this.ressources = dataRessources;
-            console.log(this.ressources);
         },
         async getRessourceById(id) {
             await axios.get('http://apigame.co/resources/' + id, {

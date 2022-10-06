@@ -6,6 +6,7 @@ export default defineStore('factory', {
     state: () => ({
         coins: 0,
         factories: [],
+        modelfactories: [],
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjQ5NjkzNzYsImV4cCI6MTY2NTU3NDE3Nn0.d1A3eWk92Tnj7tQhtdN0gvewrZNN2NmgEPttHQHaOlM"
     }),
     actions: {
@@ -15,7 +16,7 @@ export default defineStore('factory', {
                     "Authorization": "Bearer " + this.token
                 }
             })
-
+            console.log(dataFactories.data);
             this.factories = dataFactories;
         },
 
@@ -60,11 +61,13 @@ export default defineStore('factory', {
                 // Factories-Models
 
                 async getAllFactoriesModels() {
-                    await axios.get('http://apigame.co/factories/models', {
+                    let  dataFactories = await axios.get('http://apigame.co/factories/models', {
                         headers: {
                             "Authorization": "Bearer " + this.token
                         }
                     })
+                    this.modelfactories = dataFactories.data;
+                    console.log(dataFactories.data);
                 },
 
 

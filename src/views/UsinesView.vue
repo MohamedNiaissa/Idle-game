@@ -2,10 +2,10 @@
   <body>
       <div>Usines :</div>
       <button @click='formUsine(true)'>Créer une usine</button>
-      <form @submit.prevent="createFact" v-if="create">
+      <form @submit.prevent="createFact" v-show="create">
         <div class="usineList">
-            <div v-for="(Ressource,index) in listRessource" class="infoUsine"><img class="usine" src="">{{Ressource[index]}}<input type="radio" name="typeOfFact" value="1" v-model="type"></div>
-            <input type="submit" class="createButton">Créer l'usine: {{typeRessource}}
+            <div v-for="(Ressource,index) in ressources.data" :key="index" class="infoUsine">{{Ressource.name}}<img class="usine" :src="Ressource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="Ressource.id" v-model="type"></div>
+            <input type="submit" class="createButton" :value="typeRessource">
         </div>
       </form>
   </body>
@@ -19,53 +19,45 @@ export default {
   data() {
       return {
           create: false,
+          oldtype: 0,
           type: 0,
-          listRessource: []
+          typeRessource: "?",
       }
   },
   methods: {
     ...mapActions(useFactoryStore,['fetchFactories']),
+    ...mapActions(useFactoryStore,['getAllFactoriesModels']),
     ...mapActions(useFactoryStore,['createFactory']),
     ...mapActions(useRessourceStore, ['getAllRessources']),
     formUsine(statut)
     {
+        this.getAllRessources();
+        this.fetchFactories();
         this.create = statut;
-        this.RessourceList();
     },
     createFact()
     {
         this.createFactory(parseInt(this.type));
+        this.type = 0;
         this.formUsine(false);
     },
-    RessourceList()
+    actualRessource(index)
     {
-        this.getAllRessources();
-        this.listRessource = this.ressources.data;
-    },
+        this.typeRessource = "Créer usine :" + this.ressources.data[index].name;
+        if (this.typeRessource == "?")
+        {
+            this.typeRessource = "?";
+        }
+    }
   },
   computed: {
     ...mapState(useFactoryStore, ['factories']),
+    ...mapState(useFactoryStore, ['modelfactories']),
     ...mapState(useRessourceStore, ['ressources']),
     FactoryList()
     {
         this.fetchFactories();
         return this.factories.data;
-    },
-    typeRessource()
-    {
-        if (this.type==1)
-        {
-            return "Bitcoin";
-        }
-        if (this.type==2)
-        {
-            return "Fer";
-        }
-        if (this.type==3)
-        {
-            return "Bois";
-        }
-        return "?";
     }
   }
 }
