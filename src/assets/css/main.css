@@ -6,9 +6,9 @@
 body{
   margin: 0px;
   color: white;
+  background-image: url(../Background.gif);
 }
 .background{
-  background-image: url(Background.gif);
   background-repeat: repeat;
   width: 200vw;
   height: 100vh;

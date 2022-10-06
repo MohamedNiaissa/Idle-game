@@ -10,8 +10,8 @@ export default defineStore('trades', {
     }),
     actions: {
         
-        async createTrade() {
-            await axios.post('http://apigame.co/trades',{}, {
+        async createTrade(quantity_ressources,id_ressource) {
+            await axios.post('http://apigame.co/trades',{quantity : quantity_ressources, ressource_id: id_ressource}, {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
