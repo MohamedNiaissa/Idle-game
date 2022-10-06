@@ -2,8 +2,8 @@
   <body>
       <div>Entrepôt :</div>
           <div>
-              <div 
-                v-for="(key,i,index) in inventory" 
+              <div
+                v-for="(key,i,index) in inventory"
                 :key="index">
                 <span v-if="index == 1">
                     <h3> Porte Monnaie de MLegend : {{key}} coins</h3>

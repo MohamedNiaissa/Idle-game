@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+
+*{
+  font-family: 'Alkalami', serif;
+}
+body{
+  margin: 0px;
+  color: white;
+}
+/* .background{
+  background-image: url(Background.gif);
+  background-repeat: repeat;
+  width: 200vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  z-index: -1;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+
+*{
+  font-family: 'Alkalami', serif;
+}
+.background{
+  background-image: url(../assets/Background.gif);
+}
+
+.marquee {
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+}
+
+.marquee div {
+  display: block;
+  width: 200%;
+  height: 100%;
+
+  position: relative;
+  overflow: hidden;
+
+  animation: marquee 60s linear infinite;
+}
+
+.marquee span {
+  float: left;
+  width: 50%;
+}
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -100%; }
+}
