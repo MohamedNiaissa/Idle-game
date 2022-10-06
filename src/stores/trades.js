@@ -4,15 +4,16 @@ import axios from 'axios'
 
 export default defineStore('trades', {
     state: () => ({
-        coins: 0,
-        factories: [],
         offers: [],
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjQ5NjkzNzYsImV4cCI6MTY2NTU3NDE3Nn0.d1A3eWk92Tnj7tQhtdN0gvewrZNN2NmgEPttHQHaOlM"
     }),
     actions: {
-        
-        async createTrade() {
-            await axios.post('http://apigame.co/trades',{}, {
+        async createTrade(id,qtt,price) {
+            await axios.post('http://apigame.co/trades',{
+                "resourceId": id,
+                "quantity": qtt,
+                "unitPrice": price
+            }, {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
@@ -32,7 +33,6 @@ export default defineStore('trades', {
                 }
             })
         },
-
         async deleteTradeById(id) {
             await axios.delete('http://apigame.co/trades/' + id, {
                 headers: {
