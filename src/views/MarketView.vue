@@ -2,17 +2,17 @@
     <body>
         <div class="market">
             <div class="form">
-                <div class="form__resource">
+                <div class="form_elem form__resource">
                     <label for="resource">Ressource</label>
                     <select id="resource" v-model="id" value="Choisissez une ressource">
                         <option v-for="(ressource, index) in this.ressources.data" :key="index" value={{this.ressources.data[index].id}}>{{this.ressources.data[index].name}}</option>
                     </select>
                 </div>
-                <div class="form__price">
+                <div class="form_elem form__price">
                     <label for="price">Prix</label>
                     <input type="number" id="price" v-model="price">
                 </div>
-                <div class="form__quantity">
+                <div class="form_elem form__quantity">
                     <label for="quantity">Quantité</label>
                     <input type="number" id="quantity" v-model="quantity">
                 </div>
@@ -20,17 +20,19 @@
                     <button @click="submit">Ajouter</button>
                 </div>
             </div>
+            <div class="l"></div>
             <div class="offersandbtns">
+                <h4 class="titre_marché">Marché</h4>
                 <div class="offers">
                     <OffreComp v-for="(offer, index) in this.offers.slice(p,n)" :key="index" v-bind:offers="offer" />
                 </div>
                 <div class="btns">
-                    <button @click = "Prev"  > Prev </button>
-                    <button @click = "Next"> Next </button>
+                    <button @click = "Prev"> Prec </button>
+                    <button @click = "Next"> Suiv </button>
                 </div>
             </div>
-            <button @click="this.getAllRessources()"> offers </button>
         </div>
+        <button class="btn_offers" @click="this.getAllRessources()"> Faire une offre </button>
     </body>
 </template>
 
@@ -63,15 +65,15 @@ export default {
         Prev(){
             
             if(this.p > 0 ){
-                this.p -= 2;
-                this.n -= 2;
+                this.p -= 4;
+                this.n -= 4;
                 console.log(this.p,this.n)
             }
         },
         Next(){
             if(this.offers.length > this.n){
-                this.p += 2;
-                this.n += 2;
+                this.p += 4;
+                this.n += 4;
                 console.log(this.p,this.n)
             }
         }
@@ -88,7 +90,7 @@ export default {
         //[{id: 1, name: "bitcoin",…}, {id: 2, name: "Fer",…}, {id: 3, name: "Bois",…}]
         return{
             p : 0,
-            n : 2,
+            n : 4,
             offers: [
                 {
                     id: 1,
@@ -125,7 +127,49 @@ export default {
                     name: 'Poire',
                     price: 20,
                     quantity: 200
-                }
+                },
+                {
+                    id: 7,
+                    name: 'Frase',
+                    price: 10,
+                    quantity: 100
+                },
+                {
+                    id: 8,
+                    name: 'Poire',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 9,
+                    name: 'Banane',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 10,
+                    name: 'Peche',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 11,
+                    name: 'Pasteque',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 12,
+                    name: 'Mangue',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 13,
+                    name: 'Kiwi',
+                    price: 20,
+                    quantity: 200
+                },
             ]
         }
     }
@@ -133,10 +177,29 @@ export default {
 </script>
 
 <style>
+    .titre_marché{
+        color: aliceblue;
+        text-align: center;
+    }
+    .l{
+        width: 2px;
+        height: 88vh;
+        background-color: aliceblue;
+    }
+    .form_elem{
+        display: flex;
+        margin-bottom: 20px;
+    }
     .offersandbtns{
         display: flex;
+        height: 70vh;
+        width: 60%;
         flex-direction: column;
         align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        background-color: rgba(0,0,140,50%);
+        border-color: white;
     }
     .market {
         display: flex;
@@ -144,11 +207,36 @@ export default {
         color: black;
     }
     .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        height: 30vh;
         width: 30%;
+        border-radius: 16px;
+        border-style: solid;
+        background-color: rgba(0,0,140,50%);
+        color: aliceblue;
     }
     .offers {
-        width: 60%;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
+    }
+    .offer{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    .btns{
+        position: relative;
+    }
+    .btn_offers{
+        position: relative;
+        bottom: 7vh;
+
+    width: 20%;
+    left: 60vw;
     }
 </style>
