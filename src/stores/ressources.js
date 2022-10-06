@@ -34,8 +34,7 @@ export default defineStore('ressources', {
                     "Authorization": "Bearer " + this.token
                 }
             })
-            this.ressources = ressourcesData
-            console.log(this.ressources)
+            this.ressources = ressourcesData;
         },
         async getRessouorceById(id) {
             await axios.get('http://apigame.co/resources/' + id, {

@@ -6,7 +6,7 @@
 <script setup>
   import { computed }from 'vue'
   import { storeToRefs } from 'pinia'
-  import { useResources } from "../stores/resources";
+  import { useResources } from "../stores/ressources";
 
   
   const { resources }  = storeToRefs(useResources())
