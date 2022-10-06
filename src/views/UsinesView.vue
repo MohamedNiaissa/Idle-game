@@ -3,12 +3,13 @@
       <div>Usines :</div>
       <button @click='formUsine(true)'>Créer une usine</button>
       <div v-for="(Usine,index) in factories.data" :key="index">
-        <div><img :src="spriteRandomiser"></div>
+        <div :style="positionRandomiser"><img class="typeUsine" :src="Usine.model.resource.image_url"><img :src="spriteSelector(Math.floor(index+1))"></div>
       </div>
       <form @submit.prevent="createFact" v-show="create">
         <div class="usineList">
             <div v-for="(Ressource,index) in ressources.data" :key="index" class="infoUsine">{{Ressource.name}}<img class="usine" :src="Ressource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="Ressource.id" v-model="type"></div>
             <input type="submit" class="createButton" :value="typeRessource">
+            <button @click="formUsine(false)">Ne pas créer</button>
         </div>
       </form>
   </body>
@@ -32,7 +33,6 @@ export default {
   },
   methods: {
     ...mapActions(useFactoryStore,['fetchFactories']),
-    ...mapActions(useFactoryStore,['getAllFactoriesModels']),
     ...mapActions(useFactoryStore,['createFactory']),
     ...mapActions(useRessourceStore, ['getAllRessources']),
     formUsine(statut)
@@ -45,6 +45,7 @@ export default {
         this.createFactory(parseInt(this.type));
         this.type = 0;
         this.formUsine(false);
+        this.fetchFactories();
     },
     actualRessource(index)
     {
@@ -53,27 +54,27 @@ export default {
         {
             this.typeRessource = "Créer usine : ?";
         }
-    }
+    },
+    spriteSelector(index)
+    {
+        let search = "Ship"+index+".png"
+        return search;
+    },
   },
   computed: {
     ...mapState(useFactoryStore, ['factories']),
-    ...mapState(useFactoryStore, ['modelfactories']),
     ...mapState(useRessourceStore, ['ressources']),
     FactoryList()
     {
         this.fetchFactories();
         return this.factories.data;
     },
-    spriteRandomiser() {
-        let random = parseInt(Math.random()*7);
-        if (random == 0){
-            random = 1;
-        }
-        if (random == 7){
-            random = 6;
-        }
-        let search = "Ship"+random+".png"
-        return search;
+    positionRandomiser()
+    {
+        let X = parseInt((Math.random()*80)+10)
+        let Y = parseInt((Math.random()*80)+10)
+        let style = "position: absolute;left:"+X+"vw;top:"+Y+"vh;"
+        return style;
     }
   }
 }
@@ -108,5 +109,9 @@ export default {
         width: 50%;
         position: relative;
         left: 25%;
+    }
+    .typeUsine{
+        width:32px;
+        height:32px;
     }
   </style>
