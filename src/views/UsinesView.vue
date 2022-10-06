@@ -1,14 +1,14 @@
 <template>
-  <body>
-      <div>Usines :</div>
-      <button @click='formUsine(true)'>Créer une usine</button>
-      <form @submit.prevent="createFact" v-show="create">
+<body>
+    <div>Usines :</div>
+    <button @click='formUsine(true)'>Créer une usine</button>
+    <form @submit.prevent="createFact" v-show="create">
         <div class="usineList">
             <div v-for="(Ressource,index) in ressources.data" :key="index" class="infoUsine">{{Ressource.name}}<img class="usine" :src="Ressource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="Ressource.id" v-model="type"></div>
             <input type="submit" class="createButton" :value="typeRessource">
         </div>
-      </form>
-  </body>
+    </form>
+</body>
 </template>
 
 <script>
@@ -16,15 +16,15 @@ import { mapActions, mapState } from 'pinia'
 import useFactoryStore from "/src/stores/factory.js"
 import useRessourceStore from "/src/stores/ressources.js"
 export default {
-  data() {
-      return {
-          create: false,
-          oldtype: 0,
-          type: 0,
-          typeRessource: "?",
-      }
-  },
-  methods: {
+data() {
+    return {
+        create: false,
+        oldtype: 0,
+        type: 0,
+        typeRessource: "?",
+    }
+},
+methods: {
     ...mapActions(useFactoryStore,['fetchFactories']),
     ...mapActions(useFactoryStore,['getAllFactoriesModels']),
     ...mapActions(useFactoryStore,['createFactory']),
@@ -49,8 +49,8 @@ export default {
             this.typeRessource = "?";
         }
     }
-  },
-  computed: {
+},
+computed: {
     ...mapState(useFactoryStore, ['factories']),
     ...mapState(useFactoryStore, ['modelfactories']),
     ...mapState(useRessourceStore, ['ressources']),
@@ -59,7 +59,7 @@ export default {
         this.fetchFactories();
         return this.factories.data;
     }
-  }
+}
 }
 
 </script>
@@ -93,4 +93,4 @@ export default {
         position: relative;
         left: 25%;
     }
-  </style>
+</style>
