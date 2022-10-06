@@ -28,7 +28,7 @@ export default defineStore('factory', {
                     })
                 },
                 async createFactory(modelId) {
-                    await axios.post('http://apigame.co/factories', {factory_model : modelId}, {
+                    await axios.post('http://apigame.co/factories' , {factory_model : modelId}, {
                         headers: {
                             "Authorization": "Bearer " + this.token
                         }

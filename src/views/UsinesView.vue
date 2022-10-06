@@ -2,6 +2,9 @@
   <body>
       <div>Usines :</div>
       <button @click='formUsine(true)'>Créer une usine</button>
+      <div v-for="(Usine,index) in factories.data" :key="index">
+        <div><img :src="spriteRandomiser"></div>
+      </div>
       <form @submit.prevent="createFact" v-show="create">
         <div class="usineList">
             <div v-for="(Ressource,index) in ressources.data" :key="index" class="infoUsine">{{Ressource.name}}<img class="usine" :src="Ressource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="Ressource.id" v-model="type"></div>
@@ -21,8 +24,11 @@ export default {
           create: false,
           oldtype: 0,
           type: 0,
-          typeRessource: "?",
+          typeRessource: "Créer usine : ?",
       }
+  },
+  created() {
+    this.fetchFactories();
   },
   methods: {
     ...mapActions(useFactoryStore,['fetchFactories']),
@@ -32,7 +38,6 @@ export default {
     formUsine(statut)
     {
         this.getAllRessources();
-        this.fetchFactories();
         this.create = statut;
     },
     createFact()
@@ -44,9 +49,9 @@ export default {
     actualRessource(index)
     {
         this.typeRessource = "Créer usine :" + this.ressources.data[index].name;
-        if (this.typeRessource == "?")
+        if (this.typeRessource == "Créer usine : ?")
         {
-            this.typeRessource = "?";
+            this.typeRessource = "Créer usine : ?";
         }
     }
   },
@@ -58,6 +63,17 @@ export default {
     {
         this.fetchFactories();
         return this.factories.data;
+    },
+    spriteRandomiser() {
+        let random = parseInt(Math.random()*7);
+        if (random == 0){
+            random = 1;
+        }
+        if (random == 7){
+            random = 6;
+        }
+        let search = "Ship"+random+".png"
+        return search;
     }
   }
 }
