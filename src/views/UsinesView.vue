@@ -3,7 +3,7 @@
       <div>Usines :</div>
       <button @click='formUsine(true)'>Créer une usine</button>
       <div v-for="(Usine,index) in factories.data" :key="index">
-        <div :style="positionRandomiser"><img class="typeUsine" :src="Usine.model.resource.image_url"><img :src="spriteSelector(Math.floor(index+1))"></div>
+        <div :style="positionRandomiser">{{Usine.model.upgrade_base_value}}<img class="typeUsine" :src="Usine.model.resource.image_url"><img :src="spriteSelector(Math.floor(index+1))"></div>
       </div>
       <form @submit.prevent="createFact" v-show="create">
         <div class="usineList">
