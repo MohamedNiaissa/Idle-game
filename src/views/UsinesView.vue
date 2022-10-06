@@ -4,8 +4,8 @@
       <button @click='formUsine(true)'>Créer une usine</button>
       <div v-for="(Usine,index) in factories.data" :key="index">
         <div :style="positionRandomiser">
-            {{Usine.model.upgrade_base_value}}
             <img class="typeUsine" :src="Usine.model.resource.image_url">
+            <p class="level">{{Usine.model.upgrade_base_value}}</p>
             <img :src="spriteSelector(Math.floor(index+1))">
                 <button class="upgrade" @click="upgradeFact(index)">
                 <img class="upgradeIcon" src="../assets/Upgrade.png"></button>
@@ -150,5 +150,9 @@ export default {
     .sellIcon{
         width: 16px;
         height: 16px;
+    }
+    .level{
+        position: absolute;
+        bottom: 0px;
     }
   </style>
