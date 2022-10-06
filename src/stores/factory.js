@@ -9,7 +9,6 @@ export default defineStore('factory', {
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjQ5NjkzNzYsImV4cCI6MTY2NTU3NDE3Nn0.d1A3eWk92Tnj7tQhtdN0gvewrZNN2NmgEPttHQHaOlM"
     }),
     actions: {
-
         async fetchFactories() {
             const dataFactories = await axios.get('http://apigame.co/factories', {
                 headers: {
