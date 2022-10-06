@@ -41,10 +41,10 @@ export default {
   methods: {
     ...mapActions(useFactoryStore, ['fetchFactories']),
     ...mapActions(useFactoryStore, ['createFactory']),
-    ...mapActions(useRessourceStore, ['getAllResources']),
+    ...mapActions(useRessourceStore, ['getAllRessources']),
     formUsine(statut)
     {
-        this.getAllResources();
+        this.getAllRessources();
         this.create = statut;
     },
     createFact()
