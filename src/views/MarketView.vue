@@ -20,7 +20,6 @@
                     <button @click="submit">Ajouter</button>
                 </div>
             </div>
-            <div class="ligne"></div>
             <div class="offersandbtns">
                 <div class="titre_et_filtre">
                     <h4 class="titre_marché">Marché</h4>
@@ -199,19 +198,16 @@ export default {
         color: aliceblue;
         text-align: center;
     }
-    .ligne{
-        width: 2px;
-        height: 88vh;
-        background-color: aliceblue;
-    }
     .form_elem{
         display: flex;
         margin-bottom: 20px;
+        flex-direction: column;
+        width: 80%;
     }
     .offersandbtns{
         display: flex;
         height: 70vh;
-        width: 60%;
+        width: 70%;
         flex-direction: column;
         align-items: center;
         border-radius: 16px;
@@ -222,7 +218,7 @@ export default {
     }
     .market {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         color: black;
     }
     .form {
@@ -231,8 +227,7 @@ export default {
         align-items: center;
         justify-content: center;
         margin-top: 20px;
-        height: 30vh;
-        width: 30%;
+        width: 25%;
         border-radius: 16px;
         border-style: solid;
         background-color: rgba(0,0,140,50%);
@@ -242,6 +237,7 @@ export default {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-evenly;
     }
     .offer{
         display: flex;
@@ -257,5 +253,8 @@ export default {
 
     width: 20%;
     left: 60vw;
+    }
+    label{
+        font-size: 20px;
     }
 </style>
