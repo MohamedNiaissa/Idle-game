@@ -219,7 +219,7 @@ export default {
     }
     .market {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         color: black;
     }
     .form {
