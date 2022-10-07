@@ -18,7 +18,7 @@
           <form @submit.prevent="createFact" v-show="create">
               <div class="usineList">
                   <img class="ship" :src="spriteSelector(Math.floor(verifIndex+1))">
-                  <div v-for="(Ressource,index) in ressources.data" :key="index" class="infoUsine">{{Ressource.name}}<img class="usine" :src="Ressource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="Ressource.id" v-model="type"></div>
+                  <div v-for="(model,index) in models.data" :key="index" class="infoUsine">{{model.resource.name}}<img class="usine" :src="model.resource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="model.id" v-model="type"></div>
                   <input type="submit" class="createButton" :value="typeRessource">
                   <button class="createButton" type="button" @click="formUsine(false)">Ne pas créer</button>
               </div>
@@ -72,6 +72,7 @@ export default {
     formUsine(statut)
       {
           this.getAllRessources();
+          this.getAllFactoriesModels();
           this.create = statut;
       },
       createFact()
@@ -100,6 +101,7 @@ export default {
   computed: {
     ...mapState(useFactoryStore, ['factories']),
     ...mapState(useFactoryStore, ['limit']),
+    ...mapState(useFactoryStore, ['models']),
     ...mapState(useRessourceStore, ['ressources']),
     verifIndex()
       {
