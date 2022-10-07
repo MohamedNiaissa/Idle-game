@@ -3,7 +3,7 @@
       <div>Usines :</div>
       <button @click='formUsine(true)'>Créer une usine</button>
       <div v-for="(Usine,index) in factories.data" :key="index">
-        <div :style="positionRandomiser">
+        <div :style="positionRandomiser(Usine.id)">
             {{Usine.model.upgrade_base_value}}
             <img class="typeUsine" :src="Usine.model.resource.image_url">
             <img :src="spriteSelector(Math.floor(index+1))">
@@ -38,10 +38,33 @@ export default {
   created() {
     this.fetchFactories();
   },
+  computed: {
+    ...mapState(useFactoryStore, ['factories']),
+    ...mapState(useRessourceStore, ['ressources']),
+    ...mapState(useFactoryStore, ['factoryCoords']),
+    FactoryList()
+    {
+        this.fetchFactories();
+        return this.factories.data;
+    }
+  },
   methods: {
     ...mapActions(useFactoryStore, ['fetchFactories']),
     ...mapActions(useFactoryStore, ['createFactory']),
     ...mapActions(useRessourceStore, ['getAllResources']),
+    positionRandomiser(id)
+    {
+        if(this.factoryCoords[id] == undefined){
+            let X = parseInt((Math.random()*80)+10)
+            let Y = parseInt((Math.random()*80)+10)
+            let style = String("position: absolute;left:"+X+"vw;top:"+Y+"vh;")
+            this.factoryCoords[id] = style
+            return style;
+        }else{
+            let style = this.factoryCoords[id]
+            return style;
+        }
+    },
     formUsine(statut)
     {
         this.getAllResources();
@@ -67,22 +90,6 @@ export default {
         let search = "Ship"+index+".png"
         return search;
     },
-  },
-  computed: {
-    ...mapState(useFactoryStore, ['factories']),
-    ...mapState(useRessourceStore, ['ressources']),
-    FactoryList()
-    {
-        this.fetchFactories();
-        return this.factories.data;
-    },
-    positionRandomiser()
-    {
-        let X = parseInt((Math.random()*80)+10)
-        let Y = parseInt((Math.random()*80)+10)
-        let style = "position: absolute;left:"+X+"vw;top:"+Y+"vh;"
-        return style;
-    }
   }
 }
 
