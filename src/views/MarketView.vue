@@ -20,15 +20,23 @@
                     <button @click="submit">Ajouter</button>
                 </div>
             </div>
-            <div class="l"></div>
+            <div class="ligne"></div>
             <div class="offersandbtns">
-                <h4 class="titre_marché">Marché</h4>
+                <div class="titre_et_filtre">
+                    <h4 class="titre_marché">Marché</h4>
+                    <div class="filtre">
+                        Filtre :
+                        <!-- <select name="type_factory" id="factory_type">
+                            <option v-for="(ress,index) in this.ressources" value="{{ress}}" :key="index">{{ress}}</option>
+                        </select> -->
+                    </div>
+                </div>
                 <div class="offers">
                     <OffreComp v-for="(offer, index) in this.offers.slice(p,n)" :key="index" v-bind:offers="offer" />
                 </div>
                 <div class="btns">
-                    <button @click = "Prev"> Prec </button>
-                    <button @click = "Next"> Suiv </button>
+                    <button @click = "prev"> Prec </button>
+                    <button @click = "next"> Suiv </button>
                 </div>
             </div>
         </div>
@@ -62,7 +70,7 @@ export default {
                 price: this.price
             })
         },
-        Prev(){
+        prev(){
             
             if(this.p > 0 ){
                 this.p -= 4;
@@ -70,7 +78,7 @@ export default {
                 console.log(this.p,this.n)
             }
         },
-        Next(){
+        next(){
             if(this.offers.length > this.n){
                 this.p += 4;
                 this.n += 4;
@@ -169,7 +177,7 @@ export default {
                     name: 'Kiwi',
                     price: 20,
                     quantity: 200
-                },
+                }
             ]
         }
     }
@@ -177,11 +185,19 @@ export default {
 </script>
 
 <style>
+    .titre_et_filtre{
+        display: flex;
+        align-items: center;
+    }
+    .filtre{
+        color: aliceblue;
+        margin-left: 30px;
+    }
     .titre_marché{
         color: aliceblue;
         text-align: center;
     }
-    .l{
+    .ligne{
         width: 2px;
         height: 88vh;
         background-color: aliceblue;
