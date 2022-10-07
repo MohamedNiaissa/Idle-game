@@ -26,9 +26,9 @@
                     <h4 class="titre_marché">Marché</h4>
                     <div class="filtre">
                         Filtre :
-                        <!-- <select name="type_factory" id="factory_type">
-                            <option v-for="(ress,index) in this.ressources" value="{{ress}}" :key="index">{{ress}}</option>
-                        </select> -->
+                        <select name="type_factory" id="factory_type">
+                            <option v-for="(ressKey,ressVal,index) in this.ressources" value="{{ressKey}}" :key="index">{{ress}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="offers">
@@ -40,7 +40,6 @@
                 </div>
             </div>
         </div>
-        <button class="btn_offers" @click="this.getAllRessources()"> Faire une offre </button>
     </body>
 </template>
 
@@ -180,6 +179,9 @@ export default {
                 }
             ]
         }
+    },
+    mounted (){
+        this.getAllRessources();
     }
 }
 </script>
@@ -216,6 +218,7 @@ export default {
         border-style: solid;
         background-color: rgba(0,0,140,50%);
         border-color: white;
+        margin-top: 20px;
     }
     .market {
         display: flex;
