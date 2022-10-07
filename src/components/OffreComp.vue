@@ -1,5 +1,5 @@
 <template>
-    <div class="offer">
+    <div :style="fondResource(offer.resource.image_url)" class="offer">
         <div class="offer__name">
             {{offer.resource.name}}
         </div>
@@ -29,6 +29,10 @@
         methods: {
             buy(offer) {
                 console.log(offer)
+            },
+            fondResource(url)
+            {
+                return "background-image:"+url+";"
             }
         }
     }
