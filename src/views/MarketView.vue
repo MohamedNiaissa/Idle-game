@@ -4,21 +4,22 @@
             <div class="form">
                 <div class="form_elem form__resource">
                     <label for="resource">Ressource</label>
-                    <select id="resource" v-model="id" value="Choisissez une ressource">
-                        <option v-for="(ressource, index) in this.ressources.data" :key="index" value={{this.ressources.data[index].id}}>{{this.ressources.data[index].name}}</option>
+                    <select id="resource" v-model.number="id" value="Choisissez une ressource">
+                        <option v-for="(ressource, index) in this.ressources.data" :key="index" :value='this.ressources.data[index].id'>{{this.ressources.data[index].name}}</option>
                     </select>
                 </div>
                 <div class="form_elem form__price">
                     <label for="price">Prix</label>
-                    <input type="number" id="price" v-model="price">
+                    <input type="number" id="price" v-model.number="price">
                 </div>
                 <div class="form_elem form__quantity">
                     <label for="quantity">Quantité</label>
-                    <input type="number" id="quantity" v-model="quantity">
+                    <input type="number" id="quantity" v-model.number="quantity">
                 </div>
                 <div class="form__submit">
                     <button @click="submit">Ajouter</button>
                 </div>
+                <div v-show="errorCreated == true">Erreur.</div>
             </div>
             <div class="offersandbtns">
                 <div class="titre_et_filtre">
@@ -29,9 +30,10 @@
                             <option v-for="(ressKey,ressVal,index) in this.ressources" value="{{ressKey}}" :key="index">{{ress}}</option>
                         </select>
                     </div>
+                    <button @click="refresh">Rafraichir</button>
                 </div>
-                <div class="offers">
-                    <OffreComp v-for="(offer, index) in this.offers.slice(p,n)" :key="index" v-bind:offers="offer" />
+                <div v-if="offers.data != undefined" class="offers">
+                    <OffreComp v-for="(offer, index) in offers.data.slice(p,n)" :key="index" v-bind:offer="offer" />
                 </div>
                 <div class="btns">
                     <button @click = "prev"> Prec </button>
@@ -49,11 +51,8 @@ import useRessourcesStore from "../stores/ressources.js"
 import useTradesStore from "../stores/trades.js"
 import OffreComp from '../components/OffreComp.vue'
 export default {
-    // mounted() {
-    //     this.getAllResources()
-    // },
     methods: {
-        //...mapActions(useTradesStore, ['getAllTrades']),
+        ...mapActions(useTradesStore, ['getAllTrades']),
         ...mapActions(useRessourcesStore, ['getAllRessources']),
         ...mapActions(useTradesStore, ['createTrade']),
         submit() {
@@ -62,14 +61,25 @@ export default {
             //     price: this.price,
             //     quantity: this.quantity
             // })
-            this.createTrade({
-                id: this.id,
-                quantity: this.quantity,
-                price: this.price
-            })
+            try{
+                this.createTrade(
+                    this.id,
+                    this.price,
+                    this.quantity
+                )
+                this.errorCreated = false
+            } catch (e) {
+                this.errorCreated = true
+            }
+            this.id.value = ''
+            this.price.value = ''
+            this.quantity.value = ''
+        },
+        refresh() {
+            this.getAllTrades()
+            console.log(this.offers.data)
         },
         prev(){
-            
             if(this.p > 0 ){
                 this.p -= 4;
                 this.n -= 4;
@@ -77,7 +87,7 @@ export default {
             }
         },
         next(){
-            if(this.offers.length > this.n){
+            if(this.offers.data.length > this.n){
                 this.p += 4;
                 this.n += 4;
                 console.log(this.p,this.n)
@@ -87,7 +97,15 @@ export default {
     
     },
     computed: {
-        ...mapState(useRessourcesStore, ['ressources'])
+        ...mapState(useRessourcesStore, ['ressources']),
+        ...mapState(useTradesStore, ['offers'])
+        // offersArray() {
+        //     let offersArray = [];
+        //     foreach(offer in this.offers.data.length) {
+        //         offersArray.push(offer)
+        //     }
+        //     return offersArray
+        // }
     },
     components: {
         OffreComp
@@ -97,90 +115,12 @@ export default {
         return{
             p : 0,
             n : 4,
-            offers: [
-                {
-                    id: 1,
-                    name: 'Pomme',
-                    price: 10,
-                    quantity: 100
-                },
-                {
-                    id: 2,
-                    name: 'Poire',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 3,
-                    name: 'Poire',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 4,
-                    name: 'Pomme',
-                    price: 10,
-                    quantity: 100
-                },
-                {
-                    id: 5,
-                    name: 'Poire',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 6,
-                    name: 'Poire',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 7,
-                    name: 'Frase',
-                    price: 10,
-                    quantity: 100
-                },
-                {
-                    id: 8,
-                    name: 'Poire',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 9,
-                    name: 'Banane',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 10,
-                    name: 'Peche',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 11,
-                    name: 'Pasteque',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 12,
-                    name: 'Mangue',
-                    price: 20,
-                    quantity: 200
-                },
-                {
-                    id: 13,
-                    name: 'Kiwi',
-                    price: 20,
-                    quantity: 200
-                }
-            ]
+            errorCreated: false,
         }
     },
     mounted (){
         this.getAllRessources();
+        this.getAllTrades();
     }
 }
 </script>

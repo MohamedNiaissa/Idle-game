@@ -1,13 +1,13 @@
 <template>
     <div class="offer">
         <div class="offer__name">
-            {{offers.name}}
-        </div>
-        <div class="offer__price">
-            {{offers.price}}
+            {{offer.resource.name}}
         </div>
         <div class="offer__quantity">
-            {{offers.quantity}}
+            Quantité: {{offer.quantity}} unités
+        </div>
+        <div class="offer__price">
+            Prix: {{offer.unitPrice}} coins
         </div>
         <div class="offer__buy">
             <button @click="buy(offer)">Acheter</button>
@@ -18,7 +18,10 @@
 <script>
     export default {
         props: {
-            offers: String
+            offer: {
+                type: Array,
+                required: true
+            }
         },
         methods: {
             buy(offer) {
