@@ -207,8 +207,7 @@ export default {
     }
     .upgradeInfo{
         position : absolute;
-        right:-48px;
+        left:80px;
         top:-16px;
-        text-align: right;
     }
   </style>
