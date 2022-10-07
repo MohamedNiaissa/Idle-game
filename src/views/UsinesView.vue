@@ -6,6 +6,7 @@
         <div :style="positionRandomiser(Usine.id)">
             {{Usine.model.upgrade_base_value}}
             <img class="typeUsine" :src="Usine.model.resource.image_url">
+            <p class="level">{{Usine.model.upgrade_base_value}}</p>
             <img :src="spriteSelector(Math.floor(index+1))">
                 <button class="upgrade" @click="upgradeFact(index)">
                 <img class="upgradeIcon" src="../assets/Upgrade.png"></button>
@@ -51,7 +52,7 @@ export default {
   methods: {
     ...mapActions(useFactoryStore, ['fetchFactories']),
     ...mapActions(useFactoryStore, ['createFactory']),
-    ...mapActions(useRessourceStore, ['getAllResources']),
+    ...mapActions(useRessourceStore, ['getAllRessources']),
     positionRandomiser(id)
     {
         if(this.factoryCoords[id] == undefined){
@@ -67,7 +68,7 @@ export default {
     },
     formUsine(statut)
     {
-        this.getAllResources();
+        this.getAllRessources();
         this.create = statut;
     },
     createFact()
@@ -157,5 +158,9 @@ export default {
     .sellIcon{
         width: 16px;
         height: 16px;
+    }
+    .level{
+        position: absolute;
+        bottom: 0px;
     }
   </style>
