@@ -50,6 +50,18 @@ export default defineStore('trades', {
             this.offers = dataOffers;
     
             console.log(this.offers);
-        }
+        },
+        async buyRessource(id,qt) {
+            await axios.post(this.url+'trades/buy',{
+                "id": id,
+                "quantity": qt
+            }, {
+                headers: {
+                    "Authorization": "Bearer " + this.token
+                }
+            })
+        },
+
     }
+
 })
