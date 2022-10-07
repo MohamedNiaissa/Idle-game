@@ -1,6 +1,6 @@
 <template>
   <body>
-      <h3> Porte Monnaie de MrLegend : {{inventory.money}} coins</h3>  
+      <h3 class="portemonnaie"> Porte Monnaie de MrLegend : {{inventory.money}} coins</h3>  
           <div class="elements">
               <div class="element"
                 v-for="(key,i,index) in inventory.inventory_resources"
@@ -50,10 +50,25 @@
     flex-wrap: wrap;
   }
 
+  .portemonnaie{
+    margin-left: 25px;
+    border-radius: 16px;
+    border-style: solid;
+    background-color: rgba(0,0,140,50%);
+    border-color: white;
+    margin-top: 20px;
+    width: fit-content;
+    padding: 5px;
+  }
+
   .element{
     margin: 22px;
     padding: 22px;
-    background-color:  rgb(0 0 139 / 50%);
+    border-radius: 16px;
+    border-style: solid;
+    background-color: rgba(0,0,140,50%);
+    border-color: white;
+    margin-top: 20px;
   }
   .img_ressource{
     width: 90px;
