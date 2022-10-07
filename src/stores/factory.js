@@ -21,7 +21,6 @@ export default defineStore('factory', {
             })
 
             this.factories = dataFactories;
-            console.log(this.factories);
         },
         async buyFactoryLimit() {
             await axios.post(this.url+'users/buy-factory-limit', {}, {
@@ -31,7 +30,7 @@ export default defineStore('factory', {
             })
         },
         async getFactoryLimit() {
-            let limitData = await axios.get(this.url+'users/factory-limit', {}, {
+            let limitData = await axios.get(this.url+'users/factory-limit', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
