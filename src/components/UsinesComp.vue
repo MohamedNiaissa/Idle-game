@@ -51,8 +51,8 @@ export default {
     ...mapState(useRessourceStore, ['ressources']),
     positionRandomiser()
     {
-        let X = parseInt((Math.random()*80)+10);
-        let Y = parseInt((Math.random()*80)+10);
+        let X = parseInt((Math.random()*75)+10);
+        let Y = parseInt((Math.random()*75)+10);
         let style = "position: absolute;left:"+X+"vw;top:"+Y+"vh;"
         return style;
     }
@@ -128,5 +128,6 @@ export default {
         background-color: rgba(0,0,140,50%);
         border-radius: 16px;
         color: white;
+        font-size: 15px;
     }
   </style>
