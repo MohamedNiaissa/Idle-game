@@ -27,11 +27,6 @@ export default {
     ...mapActions(useFactoryStore, ['buyFactoryLimit']),
     ...mapActions(useFactoryStore, ['levelUpFactory']),
     ...mapActions(useFactoryStore, ['deleteFactoryById']),
-    spriteSelector(index)
-    {
-        let search = "Ship"+index+".png";
-        return search;
-    },
     upgradeFact(index)
     {
         this.levelUpFactory(index);
@@ -43,6 +38,11 @@ export default {
     increaseLimit()
     {
         this.buyFactoryLimit();
+    },
+    spriteSelector(index)
+    {
+        let search = "Ship"+index+".png";
+        return search;
     }
   },
   computed: {

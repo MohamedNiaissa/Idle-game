@@ -2,7 +2,7 @@
     <button class="createForm" @click='formUsine(true)'>Créer une usine</button>
     <form @submit.prevent="createFact" v-show="create">
         <div class="usineList">
-            <img :src="spriteSelector(Math.floor(factories.data.length+1))">
+            <img :src="spriteSelector(Math.floor(verifIndex+1))">
             <div v-for="(Ressource,index) in ressources.data" :key="index" class="infoUsine">{{Ressource.name}}<img class="usine" :src="Ressource.image_url"><input @click="actualRessource(index)" type="radio" name="typeOfFact" :value="Ressource.id" v-model="type"></div>
             <input type="submit" class="createButton" :value="typeRessource">
             <button class="createButton" type="button" @click="formUsine(false)">Ne pas créer</button>
@@ -54,6 +54,13 @@ export default {
   computed: {
     ...mapState(useFactoryStore, ['factories']),
     ...mapState(useRessourceStore, ['ressources']),
+    verifIndex()
+    {
+        if(this.factories.data){
+            return this.factories.data.length;
+        }
+        return 0;
+    }
   }
 }
 
