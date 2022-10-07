@@ -13,12 +13,14 @@
             Prix: {{offer.unitPrice}} coins
         </div>
         <div class="offer__buy">
-            <button @click="buy(offer)">Acheter</button>
+            <button @click="buy(offer,offer.inventory.id,offer.quantity)">Acheter</button>
         </div>
     </div>
 </template>
 
 <script>
+    import { mapActions } from 'pinia';
+import useTradesStore from "../stores/trades.js"
     export default {
         props: {
             offer: {
@@ -27,7 +29,9 @@
             }
         },
         methods: {
-            buy(offer) {
+            ...mapActions(useTradesStore, ['buyRessource']),
+            buy(offer,id,qt) {
+                this.buyRessource(id,qt)
                 console.log(offer)
             }
         },
