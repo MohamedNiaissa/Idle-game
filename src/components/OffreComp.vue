@@ -30,6 +30,8 @@
             buy(offer) {
                 console.log(offer)
             }
+        },
+        computed: {
         }
     }
 </script>

@@ -29,7 +29,6 @@
 <script>
 import { mapActions, mapState } from 'pinia'
 import useFactoryStore from "/src/stores/factory.js"
-import useRessourceStore from "/src/stores/ressources.js"
 export default {
     data() {
         return {
@@ -50,7 +49,6 @@ export default {
     ...mapActions(useFactoryStore, ['deleteFactoryById']),
     ...mapActions(useFactoryStore, ['createFactory']),
     ...mapActions(useFactoryStore, ['getAllFactoriesModels']),
-    ...mapActions(useRessourceStore, ['getAllRessources']),
     upgradeFact(index)
     {
         this.levelUpFactory(index);
@@ -73,7 +71,6 @@ export default {
     },
     formUsine(statut)
       {
-          this.getAllRessources();
           this.getAllFactoriesModels();
           this.create = statut;
       },
@@ -100,7 +97,7 @@ export default {
       },
       actualRessource(index)
       {
-          this.typeRessource = "Créer usine :" + this.ressources.data[index].name;
+          this.typeRessource = "Créer usine :" + this.models.data[index].resource.name;
           if (this.typeRessource == "Créer usine : ?")
           {
               this.typeRessource = "Créer usine : ?";
@@ -112,7 +109,6 @@ export default {
     ...mapState(useFactoryStore, ['factoryCoords']),
     ...mapState(useFactoryStore, ['limit']),
     ...mapState(useFactoryStore, ['models']),
-    ...mapState(useRessourceStore, ['ressources']),
     verifIndex()
       {
           if(this.factories.data){
