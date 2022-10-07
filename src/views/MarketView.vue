@@ -2,17 +2,17 @@
     <body>
         <div class="market">
             <div class="form">
-                <div class="form__resource">
+                <div class="form_elem form__resource">
                     <label for="resource">Ressource</label>
                     <select id="resource" v-model="id" value="Choisissez une ressource">
                         <option v-for="(ressource, index) in this.ressources.data" :key="index" value={{this.ressources.data[index].id}}>{{this.ressources.data[index].name}}</option>
                     </select>
                 </div>
-                <div class="form__price">
+                <div class="form_elem form__price">
                     <label for="price">Prix</label>
                     <input type="number" id="price" v-model="price">
                 </div>
-                <div class="form__quantity">
+                <div class="form_elem form__quantity">
                     <label for="quantity">Quantité</label>
                     <input type="number" id="quantity" v-model="quantity">
                 </div>
@@ -20,10 +20,25 @@
                     <button @click="submit">Ajouter</button>
                 </div>
             </div>
-            <div class="offers">
-                <OffreComp v-for="(offer, index) in this.offers" :key="index" v-bind:offers="offer" />
+            <div class="ligne"></div>
+            <div class="offersandbtns">
+                <div class="titre_et_filtre">
+                    <h4 class="titre_marché">Marché</h4>
+                    <div class="filtre">
+                        Filtre :
+                        <select name="type_factory" id="factory_type">
+                            <option v-for="(ressKey,ressVal,index) in this.ressources" value="{{ressKey}}" :key="index">{{ress}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="offers">
+                    <OffreComp v-for="(offer, index) in this.offers.slice(p,n)" :key="index" v-bind:offers="offer" />
+                </div>
+                <div class="btns">
+                    <button @click = "prev"> Prec </button>
+                    <button @click = "next"> Suiv </button>
+                </div>
             </div>
-            <button @click="this.getAllRessources()"> offers </button>
         </div>
     </body>
 </template>
@@ -31,7 +46,6 @@
 <script>
     
 import { mapActions, mapState } from 'pinia'
-//import useTradesStore from "../stores/trades.js"
 import useRessourcesStore from "../stores/ressources.js"
 import useTradesStore from "../stores/trades.js"
 import OffreComp from '../components/OffreComp.vue'
@@ -54,7 +68,24 @@ export default {
                 quantity: this.quantity,
                 price: this.price
             })
+        },
+        prev(){
+            
+            if(this.p > 0 ){
+                this.p -= 4;
+                this.n -= 4;
+                console.log(this.p,this.n)
+            }
+        },
+        next(){
+            if(this.offers.length > this.n){
+                this.p += 4;
+                this.n += 4;
+                console.log(this.p,this.n)
+            }
         }
+
+    
     },
     computed: {
         ...mapState(useRessourcesStore, ['ressources'])
@@ -65,6 +96,8 @@ export default {
     data() {
         //[{id: 1, name: "bitcoin",…}, {id: 2, name: "Fer",…}, {id: 3, name: "Bois",…}]
         return{
+            p : 0,
+            n : 4,
             offers: [
                 {
                     id: 1,
@@ -101,24 +134,128 @@ export default {
                     name: 'Poire',
                     price: 20,
                     quantity: 200
+                },
+                {
+                    id: 7,
+                    name: 'Frase',
+                    price: 10,
+                    quantity: 100
+                },
+                {
+                    id: 8,
+                    name: 'Poire',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 9,
+                    name: 'Banane',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 10,
+                    name: 'Peche',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 11,
+                    name: 'Pasteque',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 12,
+                    name: 'Mangue',
+                    price: 20,
+                    quantity: 200
+                },
+                {
+                    id: 13,
+                    name: 'Kiwi',
+                    price: 20,
+                    quantity: 200
                 }
             ]
         }
+    },
+    mounted (){
+        this.getAllRessources();
     }
 }
 </script>
 
 <style>
+    .titre_et_filtre{
+        display: flex;
+        align-items: center;
+    }
+    .filtre{
+        color: aliceblue;
+        margin-left: 30px;
+    }
+    .titre_marché{
+        color: aliceblue;
+        text-align: center;
+    }
+    .ligne{
+        width: 2px;
+        height: 88vh;
+        background-color: aliceblue;
+    }
+    .form_elem{
+        display: flex;
+        margin-bottom: 20px;
+    }
+    .offersandbtns{
+        display: flex;
+        height: 70vh;
+        width: 60%;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        background-color: rgba(0,0,140,50%);
+        border-color: white;
+        margin-top: 20px;
+    }
     .market {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
+        color: black;
     }
     .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        height: 30vh;
         width: 30%;
+        border-radius: 16px;
+        border-style: solid;
+        background-color: rgba(0,0,140,50%);
+        color: aliceblue;
     }
     .offers {
-        width: 60%;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
+    }
+    .offer{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    .btns{
+        position: relative;
+    }
+    .btn_offers{
+        position: relative;
+        bottom: 7vh;
+
+    width: 20%;
+    left: 60vw;
     }
 </style>

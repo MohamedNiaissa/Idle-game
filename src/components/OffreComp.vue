@@ -30,7 +30,7 @@
 
 <style>
     .offer{
-        width: 30%;
+        width: 187px;
         height: 100px;
         display: flex;
         justify-content: space-evenly;
