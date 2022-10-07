@@ -18,6 +18,11 @@
             
                 </div>
               </div>
+              <div class="btns">
+                    <button @click = "prev"> Prec </button>
+                    <div>-  ( {{page}} )  -</div>
+                    <button @click = "next"> Suiv </button>
+                </div>
             </div>
   </body>
   </template>
