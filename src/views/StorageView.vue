@@ -1,6 +1,5 @@
 <template>
   <body>
-      <div>Entrepôt :</div>
       <h3> Porte Monnaie de MrLegend : {{inventory.money}} coins</h3>  
           <div class="elements">
               <div class="element"
