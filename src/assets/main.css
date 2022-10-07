@@ -41,7 +41,7 @@ body{
   width: 200%;
   height: 100%;
 
-  position: relative;
+  position: fixed;
   overflow: hidden;
 
   animation: marquee 60s linear infinite;

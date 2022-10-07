@@ -1,16 +1,18 @@
 <template>
     <body>
-      <div>Usines : <p v-if="factories.data">{{factories.data.length}}/{{limit.data.factory_limit}}</p><button class="buttonAdd" @click="increaseLimit">Augmenter le nombre d'usine maximale</button></div>
-          <div v-for="(Usine,index) in factories.data" :key="index">
-              <div :style="positionRandomiser()">
-                  <img class="typeUsine" :src="Usine.model.resource.image_url">
-                  <p class="level">{{Usine.level}}</p>
-                  <img class="ship" :src="spriteSelector(Math.floor(index+1))">
-                      <button class="upgrade" @click="upgradeFact(Usine.id)">
-                      <img class="upgradeIcon" src="../assets/Upgrade.png"></button>
-                      <p class="upgradeInfo">{{Usine.model.upgrade_base_value}}:{{Usine.model.upgrade_resource.name}}</p>
-                      <button class="sell" @click="sellFact(Usine.id)"><img class="sellIcon" src="../assets/Sell.png"></button>
-                  </div>
+      <div>Usines :<button class="buttonAdd" @click="increaseLimit">Augmenter le nombre d'usine maximale</button></div>
+          <div v-if="factories.data">
+              <div v-for="(Usine,index) in factories.data" :key="index">
+                  <div :style="positionRandomiser()">
+                      <img class="typeUsine" :src="Usine.model.resource.image_url">
+                      <p class="level">{{Usine.level}}</p>
+                      <img class="ship" :src="spriteSelector(Math.floor(index+1))">
+                          <button class="upgrade" @click="upgradeFact(Usine.id)">
+                          <img class="upgradeIcon" src="../assets/Upgrade.png"></button>
+                          <p class="upgradeInfo">{{Usine.level**Usine.model.upgrade_coef}}:{{Usine.model.upgrade_resource.name}}</p>
+                          <button class="sell" @click="sellFact(Usine.id)"><img class="sellIcon" src="../assets/Sell.png"></button>
+                      </div>
+                </div>
             </div>
       <button class="createForm" @click='formUsine(true)'>Créer une usine</button>
           <form @submit.prevent="createFact" v-show="create">
@@ -60,6 +62,7 @@ export default {
     increaseLimit()
     {
         this.buyFactoryLimit();
+        this.getFactoryLimit();
     },
     spriteSelector(index)
     {
@@ -81,7 +84,7 @@ export default {
       positionRandomiser()
       {
           let X = parseInt((Math.random()*80)+10);
-          let Y = parseInt((Math.random()*80)+10);
+          let Y = parseInt((Math.random()*75)+10);
           let style = "position: absolute;left:"+X+"vw;top:"+Y+"vh;"
           return style;
       },
@@ -204,5 +207,6 @@ export default {
         position : absolute;
         right:-48px;
         top:-16px;
+        text-align: right;
     }
   </style>
