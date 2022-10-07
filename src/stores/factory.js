@@ -21,7 +21,6 @@ export default defineStore('factory', {
             })
 
             this.factories = dataFactories;
-            console.log(this.factories.data);
         },
         async buyFactoryLimit() {
             await axios.post(this.url+'users/buy-factory-limit', {}, {

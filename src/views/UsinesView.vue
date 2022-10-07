@@ -107,7 +107,7 @@ export default {
               return this.factories.data.length;
           }
           return 0;
-      }
+      },
   }
 }
 
