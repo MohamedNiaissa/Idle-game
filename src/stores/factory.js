@@ -7,6 +7,7 @@ export default defineStore('factory', {
         coins: 0,
         factories: [],
         factoryCoords: {},
+        models: [],
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjUxMjczNjIsImV4cCI6MTY2NTczMjE2Mn0.jVXrDwvq215wF1d_TAB5ULEHy1LTSV9LRFoB6pFQTTs",
         url: "https://apigame.co/"
     }),
@@ -21,7 +22,6 @@ export default defineStore('factory', {
             })
 
             this.factories = dataFactories;
-            console.log(this.factories);
         },
         async buyFactoryLimit() {
             await axios.post(this.url+'users/buy-factory-limit', {}, {
@@ -31,7 +31,7 @@ export default defineStore('factory', {
             })
         },
         async getFactoryLimit() {
-            let limitData = await axios.get(this.url+'users/factory-limit', {}, {
+            let limitData = await axios.get(this.url+'users/factory-limit', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
@@ -72,11 +72,12 @@ export default defineStore('factory', {
         // Factories-Models
 
         async getAllFactoriesModels() {
-            await axios.get(this.url+'factories/models', {
+            let modelsData = await axios.get(this.url+'factories/models', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
             })
+            this.models = modelsData;
         },
 
 
