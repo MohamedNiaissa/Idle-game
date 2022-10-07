@@ -31,7 +31,7 @@ export default defineStore('factory', {
             })
         },
         async getFactoryLimit() {
-            let limitData = await axios.get(this.url+'users/factory-limit', {}, {
+            let limitData = await axios.get(this.url+'users/factory-limit', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
