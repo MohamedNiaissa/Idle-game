@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'pinia';
+import { mapActions , mapState} from 'pinia';
 import useTradesStore from "../stores/trades.js"
     export default {
         props: {
@@ -35,8 +35,6 @@ import useTradesStore from "../stores/trades.js"
                 console.log(offer)
             }
         },
-        computed: {
-        }
     }
 </script>
 
