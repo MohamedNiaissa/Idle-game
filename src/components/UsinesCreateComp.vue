@@ -79,5 +79,6 @@ export default {
         background-color: rgba(0,0,140,50%);
         border-radius: 16px;
         color: white;
+        font-size: 15px;
     }
   </style>

@@ -37,6 +37,7 @@
                 </div>
                 <div class="btns">
                     <button @click = "prev"> Prec </button>
+                    <div>-  ( {{page}} )  -</div>
                     <button @click = "next"> Suiv </button>
                 </div>
             </div>
@@ -83,6 +84,7 @@ export default {
             if(this.p > 0 ){
                 this.p -= 4;
                 this.n -= 4;
+                this.page -= 1;
                 console.log(this.p,this.n)
             }
         },
@@ -90,6 +92,7 @@ export default {
             if(this.offers.data.length > this.n){
                 this.p += 4;
                 this.n += 4;
+                this.page += 1;
                 console.log(this.p,this.n)
             }
         }
@@ -116,6 +119,7 @@ export default {
             p : 0,
             n : 4,
             errorCreated: false,
+            page : 1,
         }
     },
     mounted (){
@@ -186,13 +190,18 @@ export default {
     }
     .btns{
         position: relative;
+        background-color: white;
+        display: flex;
+        border-radius: 10px;
+    }
+    .btns button{
+        border-radius: 50px;
     }
     .btn_offers{
         position: relative;
         bottom: 7vh;
-
-    width: 20%;
-    left: 60vw;
+        width: 20%;
+        left: 60vw;
     }
     label{
         font-size: 20px;

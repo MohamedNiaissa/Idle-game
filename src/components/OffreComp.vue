@@ -1,10 +1,10 @@
 <template>
-    <div :style="fondResource(offer.resource.image_url)" class="offer">
+    <div class="offer">
         <div class="offer__name">
             {{offer.resource.name}}
         </div>
-        <div class="name_seller">
-            Vendeur : {{ offer.owner.username }}
+        <div class="offer__owner">
+            Vendeur: {{offer.owner.username}}
         </div>
         <div class="offer__quantity">
             Quantité: {{offer.quantity}} unités
@@ -13,18 +13,12 @@
             Prix: {{offer.unitPrice}} coins
         </div>
         <div class="offer__buy">
-            <button @click="buy(offer,offer.inventory.id,offer.quantity)">Acheter</button>
+            <button @click="buy(offer)">Acheter</button>
         </div>
     </div>
 </template>
 
-
-
 <script>
-import { mapActions } from 'pinia';
-import useTradesStore from "../stores/trades.js"
-
-
     export default {
         props: {
             offer: {
@@ -33,14 +27,8 @@ import useTradesStore from "../stores/trades.js"
             }
         },
         methods: {
-            ...mapActions(useTradesStore, ['buyRessource']),
-            buy(offer,id,qt) {
-                this.buyRessource(id,qt)
+            buy(offer) {
                 console.log(offer)
-            },
-            fondResource(url)
-            {
-                return "background-image:"+url+";"
             }
         }
     }
@@ -58,5 +46,12 @@ import useTradesStore from "../stores/trades.js"
         box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
         margin: 30px;
         margin-top: 0px;
+    }
+    .offer div{
+        margin-bottom: -5px;
+    }
+    .offer__name{
+        font-weight: bold;
+        font-size: 20px;
     }
 </style>
