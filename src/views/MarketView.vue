@@ -85,7 +85,6 @@ export default {
                 this.p -= 4;
                 this.n -= 4;
                 this.page -= 1;
-                console.log(this.p,this.n)
             }
         },
         next(){
@@ -93,7 +92,6 @@ export default {
                 this.p += 4;
                 this.n += 4;
                 this.page += 1;
-                console.log(this.p,this.n)
             }
         }
 

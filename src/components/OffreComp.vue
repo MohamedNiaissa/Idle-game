@@ -12,14 +12,15 @@
         <div class="offer__price">
             Prix: {{offer.unitPrice}} coins
         </div>
-        <div class="offer__buy">
-            <button @click="buy(offer,offer.inventory.id,offer.quantity)">Acheter</button>
+        <div class="offer__buy__and__suppr">
+            <button @click="buy(offer,offer.id,offer.quantity)">Acheter</button>
+            <button @click="deleteTradeById(offer.id)" class="btn_suppr" v-show="offer.owner.username == 'MrLegend'">Supprimer</button>
         </div>
     </div>
 </template>
 
 <script>
-import { mapActions , mapState} from 'pinia';
+    import { mapActions } from 'pinia';
 import useTradesStore from "../stores/trades.js"
     export default {
         props: {
@@ -30,11 +31,17 @@ import useTradesStore from "../stores/trades.js"
         },
         methods: {
             ...mapActions(useTradesStore, ['buyRessource']),
+            ...mapActions(useTradesStore, ['deleteTradeById']),
             buy(offer,id,qt) {
                 this.buyRessource(id,qt)
                 console.log(offer)
-            }
-        },
+                console.log(offer.id)
+            },
+
+
+
+
+        }
     }
 </script>
 
@@ -57,5 +64,8 @@ import useTradesStore from "../stores/trades.js"
     .offer__name{
         font-weight: bold;
         font-size: 20px;
+    }
+    .btn_suppr{
+        background-color: rgba(246, 19, 19, 0.6);
     }
 </style>
