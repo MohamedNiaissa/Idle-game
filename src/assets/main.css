@@ -5,7 +5,10 @@
 }
 body{
   margin: 0px;
+  width: 100%;
+  height: 100%;
   color: white;
+
 }
 /* .background{
   background-image: url(Background.gif);
@@ -23,6 +26,7 @@ body{
   font-family: 'Alkalami', serif;
 }
 .background{
+  
   background-image: url(../assets/Background.gif);
 }
 
