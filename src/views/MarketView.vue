@@ -26,14 +26,18 @@
                     <h4 class="titre_marché">Marché</h4>
                     <div class="filtre">
                         Filtre :
-                        <select name="type_factory" id="factory_type">
-                            <option v-for="(ressKey,ressVal,index) in this.ressources" value="{{ressKey}}" :key="index">{{ress}}</option>
+                        <select @change="p = 0, n = 4" ref="select" name="type_factory" id="factory_type" v-model="filter" value="market">
+                            <option value="market" selected>Offres du marché</option>
+                            <option value="myOffers">Mes offres</option>
                         </select>
                     </div>
                     <button @click="refresh">Rafraichir</button>
                 </div>
-                <div v-if="offers.data != undefined" class="offers">
+                <div v-if="offers.data != undefined && this.filter == 'market'" class="offers">
                     <OffreComp v-for="(offer, index) in offers.data.slice(p,n)" :key="index" v-bind:offer="offer" />
+                </div>
+                <div v-if="myOffers != undefined && this.filter == 'myOffers'" class="offers">
+                    <OffreComp v-for="(offer, index) in myOffers.splice(p,n)" :key="index" v-bind:offer="offer" />
                 </div>
                 <div class="btns">
                     <button @click = "prev"> Prec </button>
@@ -54,6 +58,7 @@ import OffreComp from '../components/OffreComp.vue'
 export default {
     methods: {
         ...mapActions(useTradesStore, ['getAllTrades']),
+        ...mapActions(useTradesStore, ['getAllMyTrades']),
         ...mapActions(useRessourcesStore, ['getAllRessources']),
         ...mapActions(useTradesStore, ['createTrade']),
         submit() {
@@ -89,19 +94,28 @@ export default {
             }
         },
         next(){
-            if(this.offers.data.length > this.n){
-                this.p += 4;
-                this.n += 4;
-                this.page += 1;
-                console.log(this.p,this.n)
-            }
-        }
-
-    
+            this.p += 4;
+            this.n += 4;
+            this.page += 1;
+            console.log(this.p,this.n) 
+        }   
     },
     computed: {
         ...mapState(useRessourcesStore, ['ressources']),
-        ...mapState(useTradesStore, ['offers'])
+        ...mapState(useTradesStore, ['offers']),
+        ...mapState(useTradesStore, ['myOffers']),
+        myOffers() {
+            let myOffers = [];
+            if(this.offers.data != undefined){
+                this.offers.data.forEach(offer => {
+                    if(offer.owner.username == 'MrLegend') {
+                        myOffers.push(offer)
+                    }
+                })
+            }
+            console.log(myOffers);
+            return myOffers;
+        },
         // offersArray() {
         //     let offersArray = [];
         //     foreach(offer in this.offers.data.length) {
@@ -120,6 +134,10 @@ export default {
             n : 4,
             errorCreated: false,
             page : 1,
+            filter: 'market',
+            quantity: '',
+            price: '',
+            id: '',
         }
     },
     mounted (){
@@ -179,6 +197,7 @@ export default {
     }
     .offers {
         width: 100%;
+        height: 340px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;

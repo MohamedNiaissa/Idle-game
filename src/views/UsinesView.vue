@@ -165,6 +165,7 @@ export default {
         top:0px;
         display: flex;
         justify-content: center;
+        cursor: pointer;
     }
     .upgradeIcon
     {
@@ -181,6 +182,7 @@ export default {
         bottom:0px;
         display: flex;
         justify-content: center;
+        cursor: pointer;
     }
     .sellIcon
     {

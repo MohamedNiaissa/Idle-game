@@ -5,6 +5,7 @@ import axios from 'axios'
 export default defineStore('trades', {
     state: () => ({
         offers: [],
+        myOffers: [],
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjUxMjczNjIsImV4cCI6MTY2NTczMjE2Mn0.jVXrDwvq215wF1d_TAB5ULEHy1LTSV9LRFoB6pFQTTs",
         url: "https://apigame.co/"
     }),
@@ -21,11 +22,12 @@ export default defineStore('trades', {
             })
         },
         async getAllMyTrades() {
-            await axios.get(this.url+'trades/my', {
+            let dataOffers = await axios.get(this.url+'trades/my', {
                 headers: {
                     "Authorization": "Bearer " + this.token
                 }
             })
+            this.myOffers = dataOffers;
         },
         async getTradeById(id) {
             await axios.get(this.url+'trades/' + id, {
@@ -48,8 +50,6 @@ export default defineStore('trades', {
                 }
             })
             this.offers = dataOffers;
-    
-            console.log(this.offers);
         }
     }
 })
