@@ -1,6 +1,6 @@
 <template>
     <body>
-      <div>Usines :<button class="buttonAdd" @click="increaseLimit">Augmenter le nombre d'usine maximale</button></div>
+        <button class="buttonAdd" @click="increaseLimit">Augmenter le nombre d'usines maximales</button>
           <div v-if="factories.data">
               <div v-for="(Usine,index) in factories.data" :key="index">
                   <div :style="positionRandomiser()">
