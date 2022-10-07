@@ -8,6 +8,7 @@ export default defineStore('factory', {
         factories: [],
         factoryCoords: {},
         models: [],
+        limit: [],
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yTGVnZW5kIiwic3ViIjoxLCJyb2xlIjowLCJpYXQiOjE2NjUxMjczNjIsImV4cCI6MTY2NTczMjE2Mn0.jVXrDwvq215wF1d_TAB5ULEHy1LTSV9LRFoB6pFQTTs",
         url: "https://apigame.co/"
     }),

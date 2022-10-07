@@ -3,7 +3,7 @@
         <button class="buttonAdd" @click="increaseLimit">Augmenter le nombre d'usines maximales</button>
           <div v-if="factories.data">
               <div v-for="(Usine,index) in factories.data" :key="index">
-                  <div :style="positionRandomiser()">
+                  <div :style="positionRandomiser(Usine.id)">
                       <img class="typeUsine" :src="Usine.model.resource.image_url">
                       <p class="level">{{Usine.level}}</p>
                       <img class="ship" :src="spriteSelector(Math.floor(index+1))">
@@ -54,15 +54,17 @@ export default {
     upgradeFact(index)
     {
         this.levelUpFactory(index);
+        this.$router.go("/")
     },
     sellFact(index)
     {
         this.deleteFactoryById(index);
+        this.$router.go("/")
     },
     increaseLimit()
     {
         this.buyFactoryLimit();
-        this.getFactoryLimit();
+        this.$router.go("/")
     },
     spriteSelector(index)
     {
@@ -81,13 +83,20 @@ export default {
           this.type = 0;
           this.formUsine(false);
           this.fetchFactories();
+          this.$router.go("/")
       },
-      positionRandomiser()
+      positionRandomiser(id)
       {
-          let X = parseInt((Math.random()*80)+10);
-          let Y = parseInt((Math.random()*75)+10);
-          let style = "position: absolute;left:"+X+"vw;top:"+Y+"vh;"
-          return style;
+          if(this.factoryCoords[id] == undefined){
+              let X = parseInt((Math.random()*80)+10)
+              let Y = parseInt((Math.random()*80)+10)
+              let style = String("position: absolute;left:"+X+"vw;top:"+Y+"vh;")
+              this.factoryCoords[id] = style
+              return style;
+          }else{
+              let style = this.factoryCoords[id]
+              return style;
+          }
       },
       actualRessource(index)
       {
@@ -100,6 +109,7 @@ export default {
   },
   computed: {
     ...mapState(useFactoryStore, ['factories']),
+    ...mapState(useFactoryStore, ['factoryCoords']),
     ...mapState(useFactoryStore, ['limit']),
     ...mapState(useFactoryStore, ['models']),
     ...mapState(useRessourceStore, ['ressources']),
